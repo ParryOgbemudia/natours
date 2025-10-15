@@ -2,6 +2,7 @@ const nodemailer = require('nodemailer');
 const pug = require('pug');
 const { htmlToText } = require('html-to-text');
 
+
 module.exports = class Email {
   constructor(user, url) {
     this.to = user.email;
@@ -56,6 +57,7 @@ module.exports = class Email {
       // 3) Create a transport and send email
       const transporter = this.newTransport();
       await transporter.sendMail(mailOptions);
+
       console.log('✅ Email sent successfully!');
     } catch (err) {
       console.error('❌ Error sending email:', err);

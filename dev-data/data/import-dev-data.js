@@ -6,6 +6,8 @@ const Tour = require('./../../models/tourModel');
 const User = require('./../../models/userModel');
 const Review = require('./../../models/reviewModel');
 
+const showAlert = require('../../public/js/alerts');
+
 dotenv.config({ path: './config.env' });
 
 const DB = process.env.DATABASE.replace(
@@ -35,9 +37,11 @@ const importData = async () => {
     await Tour.create(tours);
     await Review.create(reviews, { validateBeforeSave: false });
 
-    console.log('Data successfully loaded!');
+    // console.log('Data successfully loaded!');
+    showAlert('success', 'Data successfully loaded');
   } catch (err) {
-    console.error('❌ Error loading data:', err);
+    showAlert('error', err);
+    // console.error('❌ Error loading data:', err);
   }
   process.exit();
 };
@@ -48,9 +52,11 @@ const deleteData = async () => {
     await Tour.deleteMany();
     await User.deleteMany();
     await Review.deleteMany();
-    console.log('Data successfully deleted!');
+    showAlert('success', 'Data successfully deleted!');
+    // console.log('Data successfully deleted!');
   } catch (err) {
-    console.error('❌ Error deleting data:', err);
+    showAlert('error', err);
+    // console.error('❌ Error deleting data:', err);
   }
   process.exit();
 };
